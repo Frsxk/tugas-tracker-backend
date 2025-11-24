@@ -58,6 +58,7 @@ Create a new user account.
 ```json
 {
   "name": "John Doe",
+  "username": "johndoe",
   "email": "john@example.com",
   "password": "password123"
 }
@@ -70,6 +71,7 @@ Create a new user account.
   "user": {
     "id": "user_id",
     "name": "John Doe",
+    "username": "johndoe",
     "email": "john@example.com"
   }
 }
@@ -87,12 +89,20 @@ Create a new user account.
 ### Login User
 **POST** `/api/auth/login`
 
-Authenticate user and get access token.
+Authenticate user and get access token. You can login using either username or email.
 
-**Request Body:**
+**Request Body (with email):**
 ```json
 {
   "email": "john@example.com",
+  "password": "password123"
+}
+```
+
+**Request Body (with username):**
+```json
+{
+  "username": "johndoe",
   "password": "password123"
 }
 ```
@@ -104,6 +114,7 @@ Authenticate user and get access token.
   "user": {
     "id": "user_id",
     "name": "John Doe",
+    "username": "johndoe",
     "email": "john@example.com"
   }
 }
@@ -113,6 +124,13 @@ Authenticate user and get access token.
 ```json
 {
   "error": "Invalid credentials"
+}
+```
+
+**Error Response (400):**
+```json
+{
+  "error": "Username or email is required"
 }
 ```
 
@@ -465,6 +483,7 @@ Delete an assignment.
 {
   "id": "string",
   "name": "string",
+  "username": "string",
   "email": "string",
   "password": "string (hashed)",
   "createdAt": "datetime",
